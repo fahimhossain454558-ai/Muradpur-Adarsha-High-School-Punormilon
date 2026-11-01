@@ -1,0 +1,1152 @@
+
+
+<!DOCTYPE html>
+
+<html lang="bn" class="h-full">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portrait ID Card Output</title>
+
+    <!-- Tailwind CSS -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+    <style>
+@font-face {
+    font-family: 'Nill Mohiuddin Unicode';
+    src: url('FN Nill Mohiuddin Unicode.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* স্কুল নামের ফন্ট নরমাল করার জন্য */
+.school-font {
+    font-family: 'Nill Mohiuddin Unicode', sans-serif !important;
+    font-weight: normal !important;
+    font-size: 34px !important; /* Apnar ichchamoto boro size ekhane dite paren */
+    
+    /* Ei gulo add korle font kotoi boro hok na keno upor ba niche kete jabe na */
+    display: inline-block !important;
+    overflow: visible !important;
+    padding-top: 12px !important;
+    padding-bottom: 6px !important;
+    line-height: 1.4 !important;
+}
+.luxury-dialogue-box {
+    background: linear-gradient(135deg, #073827 0%, #0b4d36 50%, #05261b 100%) !important;
+    border: 2px solid #d4af37 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    position: relative;
+}
+
+
+        /* -------------------------------------------------------------
+
+           CR-80 PORTRAIT CARD SPECIFICATIONS
+
+           Ratio: 54mm x 85.6mm (0.6307)
+
+           Screen Dimensions: 378px x 600px
+
+        ------------------------------------------------------------- */
+
+        .id-card-portrait {
+
+            width: 378px;
+
+            height: 600px;
+
+            border-radius: 18px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow: 0 20px 40px -10px rgba(2, 24, 16, 0.4), 
+
+                        0 0 30px rgba(212, 175, 55, 0.2);
+
+            background: 
+
+                radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.25) 0%, transparent 50%),
+
+                radial-gradient(circle at 15% 85%, rgba(27, 107, 80, 0.5) 0%, transparent 55%),
+
+                linear-gradient(165deg, #021810 0%, #05291d 40%, #0b3d2c 75%, #021810 100%);
+
+        }
+
+
+
+        /* Luxury Gold Waves Background */
+
+        .luxury-waves {
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image: 
+
+                radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.15) 0%, transparent 70%),
+
+                linear-gradient(45deg, transparent 46%, rgba(212, 175, 55, 0.1) 50%, transparent 54%);
+
+            background-size: 100% 100%, 60px 60px;
+
+            pointer-events: none;
+
+        }
+
+
+
+        /* Draggable Dynamic Items */
+
+        .drag-item {
+
+            position: absolute;
+
+            cursor: pointer;
+
+            touch-action: none;
+
+            transition: box-shadow 0.15s ease;
+
+            transform-origin: center center;
+
+        }
+
+
+
+        /* Interactive States when Unlocked */
+
+        body.unlocked .drag-item {
+
+            cursor: move;
+
+        }
+
+        body.unlocked .drag-item:hover {
+
+            outline: 2px dashed #d4af37;
+
+            outline-offset: 4px;
+
+            border-radius: 6px;
+
+        }
+
+        body.unlocked .drag-item.selected {
+
+            outline: 2px solid #fbbf24 !important;
+
+            outline-offset: 4px;
+
+            border-radius: 6px;
+
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+
+        }
+
+            .luxury-name-font {
+    font-family: 'Great Vibes', cursive !important;
+    font-size: 35px !important; /* Apni jeita rakhte chan */
+    letter-spacing: 0.5px;
+    
+    /* Ei gulo add korle font boro korleo upore ba niche kete jabe na */
+    overflow: visible !important;
+    display: inline-block !important;
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
+    line-height: 1.4 !important;
+    
+    /* Apnar age-er drop-shadow gulo */
+    filter: drop-shadow(0.3px 0.3px 0px #b38728) 
+            drop-shadow(-0.3px -0.3px 0px #b38728) 
+            drop-shadow(0.3px -0.3px 0px #bf953f) 
+            drop-shadow(-0.3px 0.3px 0px #bf953f);
+}
+
+        /* Metallic Gold Text */
+
+        .gold-metallic-text {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 30%, #b38728 70%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+        }
+
+
+
+        /* Print: preserve the exact 378x600 preview canvas and scale it as one unit */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                width: 210mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                display: block !important;
+                overflow: hidden !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print { display: none !important; }
+
+            main {
+                display: block !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                position: relative !important;
+            }
+
+            /* Keep the original preview canvas intact; scale the complete card only. */
+            #portraitCard {
+                position: absolute !important;
+                left: 50% !important;
+                top: 50% !important;
+                width: 378px !important;
+                height: 600px !important;
+                margin: 0 !important;
+                transform: translate(-50%, -50%) scale(0.5392126) !important;
+                transform-origin: center center !important;
+                border-radius: 18px !important;
+                overflow: hidden !important;
+                box-shadow: 0 20px 40px -10px rgba(2, 24, 16, 0.4),
+                            0 0 30px rgba(212, 175, 55, 0.2) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            #portraitCard, #portraitCard * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .drag-item { outline: none !important; }
+
+            body.unlocked .drag-item:hover,
+            body.unlocked .drag-item.selected {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+        }
+
+/* Logo frame: borderless; shape follows uploaded logo */
+/* Logo frame: transparent & borderless when no bg */
+#logoFrame { 
+    display: inline-flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    width: max-content !important; 
+    height: max-content !important; 
+    padding: 0 !important; 
+    background: transparent !important;
+    border: none !important; 
+    box-shadow: none !important; 
+    overflow: visible !important; 
+}
+#logoFrame img {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+#logoFrame.logo-circle, #outLogo.logo-circle { border-radius: 50% !important; }
+#logoFrame.logo-square, #outLogo.logo-square { border-radius: 0 !important; }
+
+#profileFrame { 
+    display: inline-flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    width: max-content; 
+    height: max-content; 
+    padding: 2px !important; 
+    overflow: hidden; 
+}
+#profileFrame.profile-circle, #profileFrame.profile-circle img { border-radius: 50% !important; }
+#profileFrame.profile-square, #profileFrame.profile-square img { border-radius: 0 !important; }
+#item-logo {
+    width: max-content !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+</style>
+
+</head>
+
+<body class="min-h-screen flex flex-col justify-between items-center py-6 bg-white">
+
+
+
+    <!-- Top Navigation & Action Header -->
+
+    <header class="no-print w-full max-w-4xl px-4 mb-4 flex flex-wrap justify-between items-center gap-3 border-b pb-4 border-gray-200">
+
+        <a href="index.html" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition flex items-center gap-2 border border-slate-300">
+
+            <i class="fa-solid fa-arrow-left"></i> Edit Inputs
+
+        </a>
+
+
+
+        <div class="flex items-center gap-2">
+
+            <!-- Lock / Unlock Toggle Button -->
+
+            <button type="button" id="lockToggleBtn" class="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2 border border-rose-500">
+
+                <i id="lockIcon" class="fa-solid fa-lock"></i>
+
+                <span id="lockStatusText">Locked (click to edit layout)</span>
+
+            </button>
+
+
+
+            <!-- Reset Button -->
+
+            <button onclick="resetLayout()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition border border-slate-300" title="Reset Layout">
+
+                <i class="fa-solid fa-rotate-left"></i> Reset
+
+            </button>
+
+<!-- Print / Download Button -->
+<button type="button" onclick="printIDCard()"
+    class="no-print px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2 border border-emerald-500">
+
+    <i class="fa-solid fa-print"></i>
+    Print / Download
+
+</button>
+        </div>
+
+    </header>
+
+
+
+    <!-- Detailed Controls Bar (Active when Unlocked) -->
+
+    <section id="controlPanel" class="no-print w-full max-w-2xl px-4 mb-4 opacity-50 pointer-events-none transition-all duration-300">
+
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 shadow-sm flex flex-wrap items-center justify-between gap-3 text-xs">
+
+
+
+            <!-- Currently Selected Indicator -->
+
+            <div class="flex items-center gap-2">
+
+                <span class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">Selected:</span>
+
+                <span id="selectedLabel" class="font-semibold text-emerald-900 bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-200">
+
+                    None (Click item on card)
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Position Controls: Up / Down & Left / Right -->
+
+            <div class="flex items-center gap-4">
+
+
+
+                <!-- Left/Right (X Position) -->
+
+                <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
+
+                    <span class="text-slate-400 px-1 font-bold">X:</span>
+
+                    <button onclick="nudgeItem(-2, 0)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700">
+
+                        <i class="fa-solid fa-chevron-left text-[10px]"></i>
+
+                    </button>
+
+                    <button onclick="nudgeItem(2, 0)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700">
+
+                        <i class="fa-solid fa-chevron-right text-[10px]"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- Up/Down (Y Position) -->
+
+                <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
+
+                    <span class="text-slate-400 px-1 font-bold">Y:</span>
+
+                    <button onclick="nudgeItem(0, -2)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700">
+
+                        <i class="fa-solid fa-chevron-up text-[10px]"></i>
+
+                    </button>
+
+                    <button onclick="nudgeItem(0, 2)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700">
+
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- Zoom / Scale Controls -->
+
+                <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
+
+                    <span class="text-slate-400 px-1 font-bold">Zoom:</span>
+
+                    <button onclick="zoomItem(-0.05)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700" title="Zoom Out">
+
+                        <i class="fa-solid fa-minus text-[10px]"></i>
+
+                    </button>
+
+                    <button onclick="zoomItem(0.05)" class="w-7 h-7 bg-slate-100 hover:bg-slate-200 font-bold rounded flex items-center justify-center text-slate-700" title="Zoom In">
+
+                        <i class="fa-solid fa-plus text-[10px]"></i>
+
+                    </button>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Main Portrait ID Card Container -->
+
+    <main class="flex-1 flex flex-col items-center justify-center relative w-full my-auto">
+
+
+
+        <div id="portraitCard" class="id-card-portrait border border-amber-500/40 text-slate-100">
+
+            <div class="luxury-waves"></div>
+
+
+
+            <!-- Item 1: School Name -->
+
+            <div id="item-school" data-name="School Name" class="drag-item text-center w-full px-4" style="top: 75px; left: 0px;">
+    <h2 id="outSchool" class="text-xl text-amber-300 drop-shadow school-font">মুরাদপুর আদর্শ উচ্চ বিদ্যালয়</h2>
+</div>
+
+
+
+            <!-- Item 6: Logo -->
+
+            <!-- Item 6: Logo (Borderless for transparent logos) -->
+<div id="item-logo" data-name="Logo Image" class="drag-item"
+     style="top: 25px; left: 50%; transform: translateX(-50%);">
+    <div id="logoFrame" class="inline-flex overflow-hidden">
+        <img id="outLogo" src="" class="block border-0 outline-none object-contain" style="width:auto;height:auto;max-width:55px;max-height:55px;">
+    </div>
+</div>
+
+
+
+            <!-- Item 2: Event Name -->
+
+            <div id="item-event" data-name="Event Name" class="drag-item text-center w-full px-4" style="top: 139px; left: 0px;">
+
+                <span id="outEvent" class="px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-200 text-xs font-semibold tracking-wider inline-block">
+
+                    পুনর্মিলনী অনুষ্ঠান
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Item 7: Profile Picture Container (Frame with Golden Border, Image without border) -->
+
+            <div id="item-profile" data-name="Profile Frame"
+     class="drag-item"
+     style="top: 190px; left: 0px; width: 99%; display: flex; justify-content: center;">
+
+                <!-- Frame Border Container -->
+
+                <div id="profileFrame" class="inline-flex p-0.5 bg-gradient-to-b from-amber-300 via-amber-500 to-amber-700 shadow-xl overflow-hidden">
+
+                    <!-- Border shape follows the uploaded profile image shape -->
+
+                    <img id="outProfile" src="" class="block border-0 outline-none object-contain" style="width:auto;height:auto;max-width:120px;max-height:120px;">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Item 3: Name -->
+
+            <div id="item-name" data-name="Student Name" class="drag-item text-center w-full px-4" style="top: 321px; left: 0px;">
+
+                <h3 id="outName" class="font-bold text-lg gold-metallic-text tracking-wide luxury-name-font tracking-wide">Ridhoan Hossain Fahim</h3>
+
+            </div>
+
+
+
+            <!-- Item 4: Batch -->
+
+            <div id="item-batch" data-name="Batch Label" class="drag-item text-center w-full px-4" style="top: 385px; left: -2px;">
+
+                <span id="outBatch" class="text-sm text-emerald-200 bg-emerald-900/80 px-3 py-0.5 rounded border border-amber-500/30 font-medium inline-block font-bold">
+
+                    ব্যাচ: 
+
+                </span>
+
+            </div>
+
+
+
+            <!-- Item 5: Dialogue with Luxury Frame Background -->
+<div id="item-dialogue" data-name="Dialogue Quote" class="drag-item text-center w-full px-6" style="top: 425px; left: 0px;">
+    <div class="luxury-dialogue-box py-2 px-4 mx-auto max-w-[300px]">
+        <p id="outDialogue" class="text-base italic text-amber-100 font-medium">
+            "আমি আসছি, আপনি আসছেন তো?"
+        </p>
+    </div>
+</div>
+
+
+
+            <!-- Item 8: QR Code -->
+
+            <div id="item-qr" data-name="QR Code Block" class="drag-item text-center" style="top: 500px; left: 155px;">
+
+                <div class="w-16 h-16 bg-white p-1 rounded-xl border border-amber-400 shadow-md flex items-center justify-center">
+
+                    <img id="outQr" src="" class="w-full h-full object-contain">
+
+                </div>
+
+                <span class="text-[9px] text-amber-300 font-bold block mt-1">SCAN VERIFY</span>
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </main>
+
+
+
+    <!-- Footer Help Info -->
+
+    <footer class="no-print text-center py-3 text-xs text-slate-500">
+
+        <span id="footerInstruction">কার্ডটি বর্তমানে <strong>লক</strong> করা আছে। পজিশন চেঞ্জ করতে উপরে <strong>Unlock</strong> বাটনে চাপ দিন।</span>
+
+    </footer>
+
+
+
+    <script>
+function printIDCard() {
+
+    const originalTitle = document.title;
+
+    const studentName =
+        document.getElementById('outName').innerText.trim();
+
+    document.title = studentName
+        ? studentName + ' - ID Card'
+        : 'ID Card';
+
+    const images = document.querySelectorAll('#portraitCard img');
+
+    const imagePromises = Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+
+        return new Promise(resolve => {
+            img.onload = resolve;
+            img.onerror = resolve;
+        });
+    });
+
+    Promise.all(imagePromises).then(() => {
+
+        window.onafterprint = function () {
+            document.title = originalTitle;
+            window.onafterprint = null;
+        };
+
+        window.print();
+    });
+}
+        let isUnlocked = false;
+
+        // The page starts in Locked mode.
+        // Clicking the button switches between Locked and Unlocked.
+
+        let selectedElement = null;
+
+        const initialPositions = {};
+
+
+
+        // Default fallbacks if local storage is missing
+
+        const defaultData = {
+
+            schoolName: "মুরাদপুর আদর্শ উচ্চ বিদ্যালয়",
+
+            eventName: "পুনর্মিলনী অনুষ্ঠান",
+
+            studentName: "",
+
+            batchNo: "",
+
+            dialogueText: "আমি আসছি, আপনি আসছেন তো?",
+
+            logoImg: "https://via.placeholder.com/80?text=Logo",
+
+            profileImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300",
+
+            qrImg: "https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=REUNION-2026"
+
+        };
+
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+            // Save initial positions for reset feature
+
+            document.querySelectorAll('.drag-item').forEach(item => {
+
+                initialPositions[item.id] = {
+
+                    left: item.style.left,
+
+                    top: item.style.top,
+
+                    transform: item.style.transform || 'scale(1)'
+
+                };
+
+            });
+
+
+
+            // Hydrate Data
+
+            const stored = localStorage.getItem('portraitIDCardData');
+
+            const data = stored ? JSON.parse(stored) : defaultData;
+
+
+
+            document.getElementById('outSchool').innerText = data.schoolName || defaultData.schoolName;
+
+            document.getElementById('outEvent').innerText = data.eventName || defaultData.eventName;
+// 💡 নাম আপডেট লজিক (HTML-এর নিজস্ব লেখাকে প্রাধান্য দেওয়া হবে যদি localStorage ফাঁকা থাকে)
+            const nameEl = document.getElementById('outName');
+            const nameContainer = document.getElementById('item-name');
+            const finalName = (data.studentName && data.studentName.trim() !== "") ? data.studentName : nameEl.innerText;
+            nameEl.innerText = finalName;
+            if (nameContainer) {
+                nameContainer.style.display = finalName.trim() ? 'block' : 'none';
+            }
+
+            // 💡 ব্যাচ আপডেট লজিক (HTML-এর নিজস্ব লেখাকে প্রাধান্য দেওয়া হবে যদি localStorage ফাঁকা থাকে)
+            const batchEl = document.getElementById('outBatch');
+            const batchContainer = document.getElementById('item-batch');
+            const finalBatch = (data.batchNo && data.batchNo.trim() !== "") ? data.batchNo : batchEl.innerText;
+            batchEl.innerText = finalBatch;
+            if (batchContainer) {
+                batchContainer.style.display = finalBatch.trim() ? 'block' : 'none';
+            }
+
+            document.getElementById('outDialogue').innerText = `"${data.dialogueText || defaultData.dialogueText}"`;
+
+            const logoImage = document.getElementById('outLogo');
+            logoImage.onload = applyLogoFrameShape;
+            logoImage.onerror = () => setLogoFrameShape(false);
+            logoImage.src = data.logoImg || defaultData.logoImg;
+            if (logoImage.complete && logoImage.naturalWidth > 0) {
+                applyLogoFrameShape();
+            }
+
+            const profileImage = document.getElementById('outProfile');
+            profileImage.onload = applyProfileFrameShape;
+            profileImage.onerror = () => setProfileFrameShape(false);
+            profileImage.src = data.profileImg || defaultData.profileImg;
+            if (profileImage.complete && profileImage.naturalWidth > 0) {
+                applyProfileFrameShape();
+            }
+
+            document.getElementById('outQr').src = data.qrImg || defaultData.qrImg;
+
+
+
+            // Connect the Lock / Unlock button
+            const lockButton = document.getElementById('lockToggleBtn');
+            if (lockButton) {
+                lockButton.addEventListener('click', toggleLockState);
+            }
+
+            // Initialize Dragging logic
+            setupDraggableItems();
+
+        });
+
+
+
+        // Match the gold frame to the uploaded image shape.
+        // Transparent corners usually indicate a circular/rounded PNG.
+        function setProfileFrameShape(isRound) {
+            const frame = document.getElementById('profileFrame');
+            const image = document.getElementById('outProfile');
+            if (!frame || !image) return;
+            frame.classList.toggle('profile-circle', !!isRound);
+            frame.classList.toggle('profile-square', !isRound);
+            image.style.borderRadius = isRound ? '50%' : '0';
+            frame.style.borderRadius = isRound ? '50%' : '0';
+        }
+
+        function applyProfileFrameShape() {
+            const image = document.getElementById('outProfile');
+            const frame = document.getElementById('profileFrame');
+            if (!image || !frame || !image.naturalWidth) return;
+            
+            // এখানেও ছবির নতুন সাইজ (90px) অনুযায়ী স্কেল সেট করা হলো
+            const scale = Math.min(1, 120 / image.naturalWidth, 120 / image.naturalHeight);
+            image.style.width = Math.round(image.naturalWidth * scale) + 'px';
+            image.style.height = Math.round(image.naturalHeight * scale) + 'px';
+            
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = 32; canvas.height = 32;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                ctx.drawImage(image, 0, 0, 32, 32);
+                const px = ctx.getImageData(0, 0, 32, 32).data;
+                const round = [[0,0],[31,0],[0,31],[31,31]].some(([x,y]) => px[(y*32+x)*4+3] < 245);
+                setProfileFrameShape(round);
+            } catch (e) { setProfileFrameShape(false); }
+        }
+
+        function setLogoFrameShape(isRound) {
+            const frame = document.getElementById('logoFrame');
+            const img = document.getElementById('outLogo');
+            if (!frame || !img) return;
+            
+            // Jodi transparent ba background na thake, tahole kono extra border/shape hobe na
+            if (!isRound) {
+                frame.style.background = 'transparent';
+                frame.style.border = 'none';
+                frame.style.padding = '0';
+                img.style.borderRadius = '0';
+            } else {
+                frame.classList.toggle('logo-circle', !!isRound);
+                img.classList.toggle('logo-circle', !!isRound);
+            }
+        }
+
+        function applyLogoFrameShape() {
+            const frame = document.getElementById('logoFrame');
+            const img = document.getElementById('outLogo');
+            if (!frame || !img || !img.naturalWidth) return;
+            
+            const scale = Math.min(1, 72 / img.naturalWidth, 72 / img.naturalHeight);
+            img.style.width = Math.round(img.naturalWidth * scale) + 'px';
+            img.style.height = Math.round(img.naturalHeight * scale) + 'px';
+            
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = 32; canvas.height = 32;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                ctx.drawImage(img, 0, 0, 32, 32);
+                const px = ctx.getImageData(0, 0, 32, 32).data;
+                
+                // Check if image has transparency in corners
+                let hasTransparency = false;
+                for (let i = 3; i < px.length; i += 4) {
+                    if (px[i] < 245) {
+                        hasTransparency = true;
+                        break;
+                    }
+                }
+                
+                if (hasTransparency) {
+                    // Transparent logo (PNG without solid bg) -> No border, no box
+                    frame.style.background = 'transparent';
+                    frame.style.border = 'none';
+                    frame.style.padding = '0';
+                    frame.style.boxShadow = 'none';
+                } else {
+                    // Solid background logo -> Keep normal styling if needed
+                    frame.style.background = '';
+                }
+            } catch (e) { 
+                setLogoFrameShape(false); 
+            }
+        }
+
+        // Toggle Lock/Unlock State
+
+        function toggleLockState() {
+
+            isUnlocked = !isUnlocked;
+
+            const body = document.body;
+
+            const lockBtn = document.getElementById('lockToggleBtn');
+
+            const lockIcon = document.getElementById('lockIcon');
+
+            const lockStatusText = document.getElementById('lockStatusText');
+
+            const controlPanel = document.getElementById('controlPanel');
+
+            const footerInstruction = document.getElementById('footerInstruction');
+
+
+
+            if (isUnlocked) {
+
+                body.classList.add('unlocked');
+
+                lockBtn.className = "px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2 border border-emerald-500";
+
+                lockIcon.className = "fa-solid fa-lock-open";
+
+                lockStatusText.innerText = "Unlocked (Click item to move/zoom)";
+
+                controlPanel.classList.remove('opacity-50', 'pointer-events-none');
+
+                footerInstruction.innerHTML = "এলিমেন্ট ড্র্যাগ করুন অথবা সিলেক্ট করে প্যানেলের <strong>X, Y, Zoom</strong> অপশন ব্যবহার করুন।";
+
+            } else {
+
+                body.classList.remove('unlocked');
+
+                lockBtn.className = "px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-2 border border-rose-500";
+
+                lockIcon.className = "fa-solid fa-lock";
+
+                lockStatusText.innerText = "Locked (click to edit layout)";
+
+                controlPanel.classList.add('opacity-50', 'pointer-events-none');
+
+                footerInstruction.innerHTML = "কার্ডটি বর্তমানে <strong>লক</strong> করা আছে। পজিশন চেঞ্জ করতে উপরে <strong>Unlock</strong> বাটনে চাপ দিন।";
+
+
+
+                // Deselect current element when locking
+
+                deselectAll();
+
+            }
+
+        }
+
+
+
+        // Selection & Drag Handler
+
+        function setupDraggableItems() {
+
+            const dragItems = document.querySelectorAll('.drag-item');
+
+
+
+            dragItems.forEach(item => {
+
+                let isDragging = false;
+
+                let startX, startY, initialLeft, initialTop;
+
+
+
+                // Mouse & Touch Start
+
+                const startDrag = (e) => {
+
+                    if (!isUnlocked) return;
+
+
+
+                    selectItem(item);
+
+                    isDragging = true;
+
+
+
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+
+
+                    startX = clientX;
+
+                    startY = clientY;
+
+                    initialLeft = parseInt(item.style.left || '0', 10);
+
+                    initialTop = parseInt(item.style.top || '0', 10);
+
+
+
+                    // Event Listeners for dragging
+
+                    document.addEventListener('mousemove', onMove);
+
+                    document.addEventListener('touchmove', onMove, { passive: false });
+
+                    document.addEventListener('mouseup', stopDrag);
+
+                    document.addEventListener('touchend', stopDrag);
+
+                };
+
+
+
+                // Mouse & Touch Move
+
+                const onMove = (e) => {
+
+                    if (!isDragging || !isUnlocked) return;
+
+                    if (e.cancelable) e.preventDefault();
+
+
+
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+
+
+                    const deltaX = clientX - startX;
+
+                    const deltaY = clientY - startY;
+
+
+
+                    item.style.left = `${initialLeft + deltaX}px`;
+
+                    item.style.top = `${initialTop + deltaY}px`;
+
+                };
+
+
+
+                // Mouse & Touch End
+
+                const stopDrag = () => {
+
+                    isDragging = false;
+
+                    document.removeEventListener('mousemove', onMove);
+
+                    document.removeEventListener('touchmove', onMove);
+
+                    document.removeEventListener('mouseup', stopDrag);
+
+                    document.removeEventListener('touchend', stopDrag);
+
+                };
+
+
+
+                item.addEventListener('mousedown', startDrag);
+
+                item.addEventListener('touchstart', startDrag, { passive: false });
+
+            });
+
+        }
+
+
+
+        // Select item and update UI label
+
+        function selectItem(item) {
+
+            if (!isUnlocked) return;
+
+            deselectAll();
+
+            selectedElement = item;
+
+            item.classList.add('selected');
+
+            document.getElementById('selectedLabel').innerText = item.getAttribute('data-name') || item.id;
+
+        }
+
+
+
+        function deselectAll() {
+
+            selectedElement = null;
+
+            document.querySelectorAll('.drag-item').forEach(i => i.classList.remove('selected'));
+
+            document.getElementById('selectedLabel').innerText = "None (Click item on card)";
+
+        }
+
+
+
+        // Move Item using Control Panel (+ / - for X and Y)
+
+        function nudgeItem(deltaX, deltaY) {
+
+            if (!isUnlocked || !selectedElement) return;
+
+
+
+            const currentLeft = parseInt(selectedElement.style.left || '0', 10);
+
+            const currentTop = parseInt(selectedElement.style.top || '0', 10);
+
+
+
+            selectedElement.style.left = `${currentLeft + deltaX}px`;
+
+            selectedElement.style.top = `${currentTop + deltaY}px`;
+
+        }
+
+
+
+        // Zoom/Scale Item using Control Panel (+ / -)
+
+        function zoomItem(scaleChange) {
+
+            if (!isUnlocked || !selectedElement) return;
+
+
+
+            // Extract existing scale transform
+
+            let currentScale = 1;
+
+            const currentTransform = selectedElement.style.transform;
+
+            if (currentTransform && currentTransform.includes('scale')) {
+
+                const match = currentTransform.match(/scale\(([^)]+)\)/);
+
+                if (match) currentScale = parseFloat(match[1]);
+
+            }
+
+
+
+            let newScale = currentScale + scaleChange;
+
+            if (newScale < 0.3) newScale = 0.3; // Minimum limit
+
+            if (newScale > 3.0) newScale = 3.0; // Maximum limit
+
+
+
+            selectedElement.style.transform = `scale(${newScale.toFixed(2)})`;
+
+        }
+
+
+
+
+        function clearAllTextData() {
+            const keys = ['schoolName', 'eventName', 'studentName', 'batchNo', 'dialogueText'];
+            let data = {};
+            try { data = JSON.parse(localStorage.getItem('portraitIDCardData') || '{}'); } catch (e) {}
+            keys.forEach(key => data[key] = '');
+            localStorage.setItem('portraitIDCardData', JSON.stringify(data));
+            ['outSchool','outEvent','outName','outBatch','outDialogue'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = '';
+            });
+            ['item-name','item-batch','item-dialogue'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+            alert('সব Text Data মুছে ফেলা হয়েছে।');
+        }
+
+        // Reset positions to initial state
+
+        function resetLayout() {
+
+            document.querySelectorAll('.drag-item').forEach(item => {
+
+                if (initialPositions[item.id]) {
+
+                    item.style.left = initialPositions[item.id].left;
+
+                    item.style.top = initialPositions[item.id].top;
+
+                    item.style.transform = initialPositions[item.id].transform;
+
+                }
+
+            });
+
+            deselectAll();
+
+        }
+
+    </script>
+
+</body>
+
+</html>
