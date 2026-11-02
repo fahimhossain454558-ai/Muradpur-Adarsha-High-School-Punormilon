@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury ID Card - Input</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            950: '#021810',
+                            900: '#05291d',
+                            800: '#0b3d2c',
+                            700: '#12543e'
+                        },
+                        gold: {
+                            light: '#f7e7ce',
+                            DEFAULT: '#d4af37',
+                            dark: '#aa7c11',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Full Screen Luxury Emerald Gradient & Abstract Waves Background */
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: 
+                radial-gradient(circle at 85% 15%, rgba(212, 175, 55, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(27, 107, 80, 0.6) 0%, transparent 55%),
+                linear-gradient(135deg, #021810 0%, #05291d 35%, #0b3d2c 70%, #021810 100%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Abstract Flowing Golden Waves */
+        .luxury-waves-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(ellipse at 50% 0%, rgba(255, 215, 0, 0.12) 0%, transparent 65%),
+                linear-gradient(60deg, transparent 46%, rgba(212, 175, 55, 0.08) 50%, transparent 54%),
+                linear-gradient(-60deg, transparent 46%, rgba(212, 175, 55, 0.05) 50%, transparent 54%);
+            background-size: 100% 100%, 80px 80px, 100px 100px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Luxury Container */
+        .glass-luxury-card {
+            background: rgba(2, 24, 16, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 
+                        0 0 40px rgba(212, 175, 55, 0.15);
+        }
+
+        /* 🌈 Animated Rainbow Text */
+        .rainbow-text {
+            background: linear-gradient(
+                90deg,
+                #ff0000,
+                #ff8000,
+                #ffff00,
+                #00ff00,
+                #00ffff,
+                #0066ff,
+                #cc00ff,
+                #ff0000
+            );
+
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: rainbowMove 5s linear infinite;
+            font-weight: 800;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.25));
+        }
+
+        @keyframes rainbowMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 400% 50%;
+            }
+        }
+    </style>
+</head>
+<body class="w-full min-h-screen flex flex-col items-center justify-center py-10 px-4 relative">
+
+    <!-- Background Abstract Design Effect -->
+    <div class="luxury-waves-bg"></div>
+
+    <!-- Main Full Screen Container -->
+    <div class="w-full max-w-4xl glass-luxury-card rounded-3xl p-6 sm:p-10 relative z-10 my-auto">
+        
+        <!-- Decorative Top Gold Glow Bar -->
+        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-900 via-gold to-emerald-900 rounded-t-3xl"></div>
+
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-8 pb-4 border-b border-gold/20">
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 flex items-center justify-center text-gold text-xl shadow-lg border border-gold/40 shrink-0">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-xl sm:text-xl rainbow-text font-['Cinzel'] tracking-wider">
+                    THIS WEBSITE IS CREATED BY RIDHOAN HOSSAIN FAHIM
+                </h1>
+                <p class="text-l text-emerald-200/80 font-medium">স্বপ্ন বড় রাখো, পরিশ্রম নীরবে করো—একদিন তোমার সফলতাই তোমার পরিচয় হয়ে উঠবে।❤️</p>
+            </div>
+        </div>
+
+        <form id="idCardForm" onsubmit="saveAndNavigate(event)" class="space-y-6">
+            
+            <!-- 1. School Name -->
+            <div>
+                <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">১. বিদ্যালয়ের নাম</label>
+                <input type="text" id="schoolName" value="মুরাদপুর আদর্শ উচ্চ বিদ্যালয়" required 
+                       class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+            </div>
+
+            <!-- 2. Event Name -->
+            <div>
+                <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">২. অনুষ্ঠানের নাম</label>
+                <input type="text" id="eventName" value="পুনর্মিলনী অনুষ্ঠান" required 
+                       class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+            </div>
+
+            <!-- 3. Name & 4. Batch & 5. Registration No -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">৩. নাম</label>
+                    <input type="text" id="studentName" value="" required 
+                           oninput="checkCapitalLetters(this)"
+                           class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-semibold focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+                    <p id="nameWarning" class="text-red-400 text-sm mt-1 hidden">⚠️ নামের মধ্যে ৩টির বেশি বড় হাতের (Capital) অক্ষর ব্যবহার করা যাবে না!</p>
+                </div>
+                <div>
+                    <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">৪. ব্যাচ</label>
+                    <input type="text" id="batchNo" value="ব্যাচ :" required 
+                           class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+                </div>
+                <div>
+                    <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">৫. রেজিষ্ট্রেশন নং</label>
+                    <input type="text" id="regNo" value="" placeholder="রেজিষ্ট্রেশন নং লিখুন..."
+                           class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+                </div>
+            </div>
+
+            <!-- 6. Dialogue -->
+            <div>
+                <label class="block text-lg font-bold text-gold uppercase tracking-wider mb-1.5">৬. ডায়লগ</label>
+                <input type="text" id="dialogueText" value="আমি আসছি, আপনি আসছেন তো?" required 
+                       class="w-full border border-gold/30 rounded-xl px-4 py-3 text-white font-medium focus:ring-2 focus:ring-gold/40 focus:border-gold outline-none transition bg-emerald-950/60">
+            </div>
+
+            <!-- Image Upload Section - All Formats Supported -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gold/20">
+                
+                <!-- 7. Logo Upload -->
+                <div class="bg-emerald-950/40 p-4 rounded-2xl border border-gold/20 text-center flex flex-col items-center justify-between">
+                    <div>
+                        <label class="block text-lg font-bold text-gold mb-2">৭. লোগো (Logo)</label>
+                        <img id="logoPreview" src="Logo.png" class="w-16 h-16 object-contain mx-auto mb-2 rounded-xl border border-gold/40 bg-emerald-950 p-1 shadow-md">
+                    </div>
+                    <input type="file" id="logoInput" accept="image/*" onchange="handleImageUpload(event, 'logoPreview')" class="text-[11px] text-emerald-200 w-full file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-gold file:text-emerald-950 font-bold cursor-pointer">
+                </div>
+
+                <!-- 8. Profile Picture Upload -->
+                <div class="bg-emerald-950/40 p-4 rounded-2xl border border-gold/20 text-center flex flex-col items-center justify-between">
+                    <div>
+                        <label class="block text-lg font-bold text-gold mb-2">৮. প্রোফাইল ছবি</label>
+                        <img id="profilePreview" src="Empty Profile Icon.jpg" class="w-16 h-20 object-cover mx-auto mb-2 rounded-xl border border-gold/40 bg-emerald-950 shadow-md">
+                    </div>
+                    <input type="file" id="profileInput" accept="image/*" onchange="handleImageUpload(event, 'profilePreview')" class="text-[11px] text-emerald-200 w-full file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:bg-gold file:text-emerald-950 font-bold cursor-pointer">
+                </div>
+
+                <!-- 9. QR Code Upload & Auto Generator -->
+                <div class="bg-emerald-950/40 p-4 rounded-2xl border border-gold/20 text-center flex flex-col items-center justify-between">
+                    <div>
+                        <label class="block text-lg font-bold text-gold mb-2">৯. QR কোড (Upload/Text)</label>
+                        <img id="qrPreview" src="QR.png" class="w-16 h-16 object-contain mx-auto mb-2 border border-gold/40 bg-white rounded-xl shadow-md p-1">
+                    </div>
+                    <div class="w-full space-y-2">
+                        <input type="file" id="qrInput" accept="image/*" onchange="handleImageUpload(event, 'qrPreview')" class="text-[11px] text-emerald-200 w-full file:mr-1 file:py-1 file:px-2 file:rounded-lg file:border-0 file:bg-gold file:text-emerald-950 font-bold cursor-pointer">
+                        <input type="text" id="qrTextInput" placeholder="QR Custom Text" oninput="generateQRFromText()" class="w-full text-xs border border-gold/30 rounded-lg px-2.5 py-1.5 bg-emerald-950/80 text-white placeholder-emerald-400/50 focus:outline-none focus:border-gold">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-6">
+                <!-- Delete Data Button -->
+                <div class="pt-2">
+                    <button type="button" onclick="deleteNameAndProfile()"
+                        class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-trash"></i> Delete Data
+                    </button>
+                </div>
+                <button type="submit" class="w-full py-4 mt-3 rounded-2xl bg-gradient-to-r from-amber-500 via-gold to-yellow-400 hover:brightness-110 text-emerald-950 font-bold text-xs tracking-widest uppercase shadow-xl transition flex items-center justify-center gap-3 border border-gold/50">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Portrait ID Card (Output.html)
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        function checkCapitalLetters(input) {
+            const nameVal = input.value;
+            const capitalLetters = nameVal.match(/[A-Z]/g);
+            const count = capitalLetters ? capitalLetters.length : 0;
+            const warningEl = document.getElementById('nameWarning');
+            
+            if (count > 3) {
+                warningEl.classList.remove('hidden');
+            } else {
+                warningEl.classList.add('hidden');
+            }
+        }
+
+        let uploadedImages = {
+            logo: 'Logo.png',
+            profile: 'Empty Profile Icon.jpg',
+            qr: 'QR.png'
+        };
+
+        // Restore Previous Input Data
+        window.addEventListener('DOMContentLoaded', function () {
+            let savedData;
+            try {
+                savedData = JSON.parse(localStorage.getItem('portraitIDCardData'));
+            } catch (e) {
+                savedData = null;
+            }
+
+            if (!savedData) return;
+
+            document.getElementById('schoolName').value = savedData.schoolName ?? '';
+            document.getElementById('eventName').value = savedData.eventName ?? '';
+            document.getElementById('studentName').value = savedData.studentName ?? '';
+            document.getElementById('batchNo').value = savedData.batchNo ?? '';
+            document.getElementById('regNo').value = savedData.regNo ?? '';
+            document.getElementById('dialogueText').value = savedData.dialogueText ?? '';
+
+            if (savedData.logoImg) {
+                uploadedImages.logo = savedData.logoImg;
+                document.getElementById('logoPreview').src = savedData.logoImg;
+            }
+            if (savedData.profileImg) {
+                uploadedImages.profile = savedData.profileImg;
+                document.getElementById('profilePreview').src = savedData.profileImg;
+            }
+            if (savedData.qrImg) {
+                uploadedImages.qr = savedData.qrImg;
+                document.getElementById('qrPreview').src = savedData.qrImg;
+            } else {
+                uploadedImages.qr = 'QR.png';
+                document.getElementById('qrPreview').src = 'QR.png';
+            }
+        });
+
+        // Image Compressor & Resizer
+        function handleImageUpload(event, targetId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        let width = img.width;
+                        let height = img.height;
+                        const maxWidth = 400;
+                        const maxHeight = 500;
+
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height *= maxWidth / width;
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width *= maxHeight / height;
+                                height = maxHeight;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+                        document.getElementById(targetId).src = compressedDataUrl;
+                        if (targetId === 'logoPreview') uploadedImages.logo = compressedDataUrl;
+                        if (targetId === 'profilePreview') uploadedImages.profile = compressedDataUrl;
+                        if (targetId === 'qrPreview') uploadedImages.qr = compressedDataUrl;
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function generateQRFromText() {
+            const text = document.getElementById('qrTextInput').value.trim();
+            if (text) {
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}`;
+                document.getElementById('qrPreview').src = qrUrl;
+                uploadedImages.qr = qrUrl;
+            } else {
+                uploadedImages.qr = 'QR.png';
+                document.getElementById('qrPreview').src = 'QR.png';
+            }
+        }
+
+        function deleteNameAndProfile() {
+            document.getElementById('studentName').value = '';
+            document.getElementById('regNo').value = '';
+            const defaultProfile = 'Empty Profile Icon.jpg';
+            uploadedImages.profile = defaultProfile;
+            document.getElementById('profilePreview').src = defaultProfile;
+            document.getElementById('profileInput').value = '';
+
+            const cardData = {
+                schoolName: document.getElementById('schoolName').value,
+                eventName: document.getElementById('eventName').value,
+                studentName: '',
+                batchNo: document.getElementById('batchNo').value,
+                regNo: '',
+                dialogueText: document.getElementById('dialogueText').value,
+                logoImg: uploadedImages.logo,
+                profileImg: defaultProfile,
+                qrImg: uploadedImages.qr
+            };
+
+            localStorage.setItem('portraitIDCardData', JSON.stringify(cardData));
+            alert('নাম, রেজিষ্ট্রেশন নং ও Profile Picture মুছে ফেলা হয়েছে।');
+        }
+
+        function saveAndNavigate(event) {
+            event.preventDefault();
+            const studentName = document.getElementById('studentName').value;
+            const capitalLetters = studentName.match(/[A-Z]/g);
+            const count = capitalLetters ? capitalLetters.length : 0;
+
+            if (count > 3) {
+                alert('নামে সর্বোচ্চ ৩টি ক্যাপিটাল (বড় হাতের) অক্ষর ব্যবহার করা যাবে!');
+                return;
+            }
+
+            const cardData = {
+                schoolName: document.getElementById('schoolName').value,
+                eventName: document.getElementById('eventName').value,
+                studentName: document.getElementById('studentName').value,
+                batchNo: document.getElementById('batchNo').value,
+                regNo: document.getElementById('regNo').value,
+                dialogueText: document.getElementById('dialogueText').value,
+                logoImg: uploadedImages.logo,
+                profileImg: uploadedImages.profile,
+                qrImg: uploadedImages.qr
+            };
+
+            try {
+                localStorage.setItem('portraitIDCardData', JSON.stringify(cardData));
+                window.location.href = 'output.html';
+            } catch (error) {
+                alert('ফাইলটি অনেক বড়! দয়া করে ছোট সাইজের ছবি আপলোড করুন।');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
